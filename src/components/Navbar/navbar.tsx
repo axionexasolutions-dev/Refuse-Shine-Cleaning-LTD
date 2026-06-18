@@ -104,7 +104,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative text-sm font-semibold tracking-wide py-1.5 cursor-pointer transition-colors duration-300",
+                    "relative text-base lg:text-[17px] font-semibold tracking-wide py-1.5 cursor-pointer transition-colors duration-300",
                     "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-primary dark:after:bg-accent after:origin-left after:transition-transform after:duration-300 after:ease-out",
                     isActive
                       ? "text-primary dark:text-accent font-bold after:scale-x-100"
@@ -182,7 +182,7 @@ export function Navbar() {
                       href={link.href}
                       onClick={() => setIsOpen(false)}
                       className={cn(
-                        "flex items-center justify-between text-base font-semibold px-2.5 py-1.5 rounded-lg transition-all cursor-pointer",
+                        "flex items-center justify-between text-lg font-bold px-2.5 py-2 rounded-lg transition-all cursor-pointer",
                         isActive
                           ? "bg-primary/5 text-primary dark:bg-accent/10 dark:text-accent font-bold"
                           : "text-foreground/90 hover:bg-muted hover:text-primary dark:hover:text-accent"

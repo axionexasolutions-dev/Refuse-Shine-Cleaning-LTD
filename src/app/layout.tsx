@@ -18,6 +18,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Refuse Shine Cleaning LTD",
   description: "Premium professional cleaning services provider",
+  icons: {
+    icon: [
+      { url: "/assets/logo/logo.jpeg" },
+      { url: "/assets/logo/logo.jpeg", sizes: "32x32", type: "image/jpeg" },
+      { url: "/assets/logo/logo.jpeg", sizes: "96x96", type: "image/jpeg" },
+      { url: "/assets/logo/logo.jpeg", sizes: "192x192", type: "image/jpeg" }
+    ],
+    apple: [
+      { url: "/assets/logo/logo.jpeg", sizes: "180x180", type: "image/jpeg" }
+    ]
+  }
 };
 
 export default function RootLayout({

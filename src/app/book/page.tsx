@@ -447,12 +447,11 @@ function BookingWizardContent() {
                         {/* Property Size */}
                         <div>
                           <label htmlFor="propertySize" className="block text-base sm:text-lg font-bold text-foreground mb-1.5">
-                            Property Size (Approx. Sq. Ft / Sq. M) <span className="text-red-500">*</span>
+                            Property Size (Approx. Sq. Ft / Sq. M) <span className="text-foreground/40 font-medium">(Optional)</span>
                           </label>
                           <input
                             type="text"
                             id="propertySize"
-                            required
                             placeholder="e.g. 1,200 sq. ft or 3 Bedroom Semi-detached"
                             value={propertySize}
                             onChange={(e) => setPropertySize(e.target.value)}
@@ -583,7 +582,7 @@ function BookingWizardContent() {
 
                           <Button
                             onClick={handleNextStep}
-                            disabled={!propertySize || (hasPets === "yes" && !petDetails)}
+                            disabled={hasPets === "yes" && !petDetails}
                             className="bg-primary hover:bg-primary/95 text-primary-foreground font-bold h-12 px-6 rounded-xl flex items-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <span>Next Step</span>
