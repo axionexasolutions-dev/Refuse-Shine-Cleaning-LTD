@@ -23,6 +23,7 @@ import {
   CheckCircle2
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 // ----------------------------------------------------
 // static datasets
@@ -162,11 +163,54 @@ function BookingWizardContent() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate booking API submit
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    try {
+      const payload = {
+        selectedService,
+        selectedFrequency,
+        bedrooms,
+        bathrooms,
+        livingRooms,
+        propertySize,
+        adults,
+        children,
+        hasPets,
+        petDetails,
+        lastCleaned,
+        isHeavilySoiled,
+        selectedExtras,
+        specialRequests,
+        uploadedPhotos,
+        preferredDate,
+        preferredTime,
+        clientName,
+        clientPhone,
+        clientEmail,
+        clientAddress
+      }
+
+      const response = await fetch("/api/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit booking inquiry. Please try again.")
+      }
+
+      setIsSuccess(true)
+      toast.success("Booking request sent successfully!")
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } catch (err: any) {
+      console.error("Booking submit error:", err)
+      toast.error(err.message || "Failed to submit request. Please verify details.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

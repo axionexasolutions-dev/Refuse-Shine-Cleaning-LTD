@@ -16,6 +16,7 @@ import {
   Compass
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { toast } from "sonner"
 
 const SERVICES_OPTIONS = [
   "Regular House Cleaning",
@@ -75,9 +76,28 @@ export default function ContactPage() {
     e.preventDefault()
     setFormState("submitting")
     
-    // Simulate contact submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    setFormState("success")
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message. Please try again.")
+      }
+
+      setFormState("success")
+      toast.success("Message sent successfully!")
+    } catch (err: any) {
+      console.error("Submission error:", err)
+      toast.error(err.message || "Failed to send message. Please check your network connection.")
+      setFormState("idle")
+    }
   }
 
   const handleReset = () => {
